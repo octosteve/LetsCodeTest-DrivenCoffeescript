@@ -12,5 +12,5 @@ task 'lint', 'Lint Everything', ->
 
 task 'test', 'Test Everything', ->
   invoke 'lint'
-  reporter = require('nodeunit').reporters['default']
+  reporter = require('nodeunit').reporters['minimal']
   reporter.run ['src/server/_server_test.coffee']

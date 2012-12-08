@@ -1,5 +1,5 @@
 "use strict"
 
 exports.testNothing = (test) ->
-  test.ok false,  "hello"
+  test.ok true,  "hello"
   test.done()
