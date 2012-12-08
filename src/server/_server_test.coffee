@@ -1,5 +1,5 @@
 "use strict"
-
+server = require './server'
 exports.testNothing = (test) ->
-  test.ok true,  "hello"
+  test.equals 3, server.number(), "Number"
   test.done()
