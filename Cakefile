@@ -13,4 +13,5 @@ task 'lint', 'Lint Everything', ->
 task 'test', 'Test Everything', ->
   invoke 'lint'
   reporter = require('nodeunit').reporters['default']
-  reporter.run ['src/server/_server_test.coffee']
+  reporter.run ['src/server/_server_test.coffee'], null, (failures) ->
+    process.exit(1) if failures
