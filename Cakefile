@@ -1,10 +1,7 @@
-task "default", -> 
-  console.log "default"
+{spawn, exec} = require 'child_process'
 
-task "example", "Example!!!", ->
-  invoke 'dependency'
-  console.log "Yaaaaar"
-
-task "dependency", ->
-  console.log "I'm a dependency!"
-
+task 'lint', 'Lint Everything', ->
+  lint = exec "./node_modules/.bin/coffeelint Cakefile"
+  lint.stdout.on 'data', (data) -> console.log data.toString()
+  lint.stderr.on 'data', (data) -> console.log data.toString()
+  console.log 'Done lint'
