@@ -9,3 +9,7 @@ task 'lint', 'Lint Everything', ->
       console.log "Errors prevented your task from continuing"
       process.exit(1)
     console.log "All Tests passed!"
+
+task 'test', 'Test Everything', ->
+  invoke 'lint'
+  console.log "Test goes here"
