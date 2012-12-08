@@ -12,4 +12,5 @@ task 'lint', 'Lint Everything', ->
 
 task 'test', 'Test Everything', ->
   invoke 'lint'
-  console.log "Test goes here"
+  reporter = require('nodeunit').reporters['default']
+  reporter.run ['test']
