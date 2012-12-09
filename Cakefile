@@ -24,15 +24,10 @@ task 'node', 'Verify Proper Node Version', ->
   return if checkNodeVersion
 
   NODE_VERSION = 'v0.8.15'
-  command =  'node --version'
-  sh command, (stdout) ->
-    version = stdout.toString().trim()
-    unless version is NODE_VERSION
-      console.log "Node version #{NODE_VERSION} required"
-      process.exit(1)
+
+  unless process.version >= NODE_VERSION
+    console.log "Node version >= #{NODE_VERSION} required"
+    process.exit(1)
 
   checkNodeVersion = true
 
-sh = (command, callback) ->
-  exec command, (error, stdout, stderr) ->
-    callback(stdout)
