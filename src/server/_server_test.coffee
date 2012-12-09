@@ -1,5 +1,6 @@
 server = require './server'
 http = require 'http'
+fs = require 'fs'
 
 exports.test_serverReturnsHelloWorld = (test) ->
   server.start(8080)
@@ -18,6 +19,13 @@ exports.test_serverReturnsHelloWorld = (test) ->
       test.ok receivedData, "should have received data"
       test.done()
     server.stop()
+
+exports.test_serverServesAFile = (test) ->
+  testDir = 'generated/test'
+  testFile = "#{testDir}/test.html"
+  fs.writeFileSync testFile, "Hello World"
+
+  test.done()
 
 exports.test_serverRunsCallbackWhenStopCompletes = (test) ->
   server.start(8080)
