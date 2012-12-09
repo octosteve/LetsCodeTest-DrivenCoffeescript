@@ -4,6 +4,9 @@ fs = require 'fs'
 checkNodeVersion = false
 checkFolderStructure = false
 
+GENERATED_DIR = 'generated'
+TEMP_TEST_FILE_DIR = "#{GENERATED_DIR}/test"
+
 task 'lint', 'Lint Everything', ->
   invoke 'node'
   command = "./node_modules/.bin/coffeelint -r Cakefile ."
@@ -40,10 +43,13 @@ task 'test_directory', "Set up folder structure for tests", ->
   generated = fs.existsSync 'generated/test'
 
   unless generated
-    fs.mkdirSync 'generated'
-    fs.mkdirSync 'generated/test'
+    fs.mkdirSync GENERATED_DIR
+    fs.mkdirSync TEMP_TEST_FILE_DIR
     checkFolderStructure = true
 
 task 'clean', 'Remove generated directories', ->
-  command = 'rm -rf generated'
+  removeDir GENERATED_DIR
+
+removeDir = (dir) ->
+  command = "rm -rf #{dir}"
   exec command

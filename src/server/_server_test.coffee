@@ -23,9 +23,13 @@ exports.test_serverReturnsHelloWorld = (test) ->
 exports.test_serverServesAFile = (test) ->
   testDir = 'generated/test'
   testFile = "#{testDir}/test.html"
-  fs.writeFileSync testFile, "Hello World"
 
-  test.done()
+  try
+    fs.writeFileSync testFile, "Hello World"
+    test.done()
+  finally
+    fs.unlinkSync testFile
+    test.ok !fs.existsSync(testFile), 'File should have been deleted'
 
 exports.test_serverRunsCallbackWhenStopCompletes = (test) ->
   server.start(8080)
