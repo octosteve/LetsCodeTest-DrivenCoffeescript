@@ -5,7 +5,7 @@ exports.tearDown = (done) ->
   server.stop -> done()
 
 exports.test_serverReturnsHelloWorld = (test) ->
-  server.start()
+  server.start(8080)
   request = http.get "http://localhost:8080"
   request.on 'response', (response) ->
     receivedData = false
