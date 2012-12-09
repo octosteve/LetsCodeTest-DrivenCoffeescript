@@ -1,6 +1,6 @@
-"use strict"
-console.log "I'm totally a server running in coffeescript"
+http = require 'http'
 
-exports.number =  ->
-  3
-
+exports.start = ->
+  console.log 'Server Started'
+  server = http.createServer()
+  server.listen(8080)

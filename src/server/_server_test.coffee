@@ -1,5 +1,9 @@
-"use strict"
 server = require './server'
-exports.testNothing = (test) ->
-  test.equals 3, server.number(), "Number"
+http = require 'http'
+
+exports.testHttpServer = (test) ->
+  server.start()
+  http.get "http://localhost:8080", (response) ->
+
   test.done()
+
