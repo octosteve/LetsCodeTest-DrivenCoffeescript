@@ -1,11 +1,16 @@
-http = require 'http'
-server = http.createServer()
+http = require "http"
+fs = require "fs"
+server = null
 
-exports.start = (portNumber) ->
-  throw portException() unless portNumber?
-  server.on 'request', (request, response) ->
-    response.end('Hello World')
-  server.listen(portNumber)
+exports.start = (htmlFileToServe, portNumber) ->
+  throw portException unless portNumber
+
+  server = http.createServer()
+  server.on "request", (request, response) ->
+    fs.readFile htmlFileToServe, (err, data) ->
+      throw err if err
+      response.end(data)
+  server.listen portNumber
 
 exports.stop = (callback) ->
   server.close callback
